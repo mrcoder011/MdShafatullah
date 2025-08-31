@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects - Md Shafatullah</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin:0; padding:0; }
+    body { font-family: 'Roboto', sans-serif; background-color: #f9f9f9; color: #0d1b2a; }
+    a { text-decoration: none; }
+    h1,h2,h3 { margin:0; }
+
+    /* ===== Navbar ===== */
+    .navbar { position: sticky; top: 0; background-color: #0d1b2a; display:flex; justify-content: space-between; align-items: center; padding:1rem 3rem; z-index:100; box-shadow:0 2px 10px rgba(0,0,0,0.2); }
+    .nav-logo { color:#ffbd39; font-weight:700; font-size:1.7rem; }
+    .nav-links { list-style:none; display:flex; gap:2rem; }
+    .nav-links li a { color:#fff; font-weight:500; padding:0.5rem 1rem; border-radius:5px; transition:0.3s; }
+    .nav-links li a:hover { background-color: #ffbd39; color:#0d1b2a; }
+
+    /* ===== Page Header ===== */
+    .page-header { text-align:center; padding:4rem 2rem 2rem; background: linear-gradient(to right, #0d1b2a, #1b263b); color:#fff; }
+    .page-header h1 { font-size:3rem; margin-bottom:1rem; }
+    .page-header p { font-size:1.2rem; max-width:700px; margin:0 auto; }
+
+    /* ===== Projects Grid ===== */
+    .projects { display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:2rem; padding:3rem; max-width:1200px; margin:0 auto; }
+    .project-card { position:relative; background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 6px 15px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s; }
+    .project-card:hover { transform: translateY(-10px); box-shadow:0 12px 25px rgba(0,0,0,0.2); }
+    .project-card img { width:100%; height:180px; object-fit:cover; }
+    .project-card .project-content { padding:1.5rem; position:relative; z-index:2; }
+    .project-card .project-content h3 { margin-bottom:0.5rem; color:#0d1b2a; }
+    .project-card .project-content p { font-size:0.95rem; line-height:1.5; color:#333; }
+    .btn-card { display:inline-block; margin-top:1rem; padding:0.6rem 1.2rem; background-color:#ffbd39; color:#0d1b2a; font-weight:600; border-radius:5px; transition:0.3s; text-align:center; }
+    .btn-card:hover { background-color:#e6a635; color:#fff; }
+
+    /* Footer */
+    footer { background-color:#0d1b2a; color:#fff; padding:2rem; text-align:center; }
+    footer a { color:#ffbd39; margin:0 0.5rem; transition:0.3s; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-logo">Md Shafatullah</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <h1>My Projects</h1>
+    <p>Showcasing mechanical engineering projects, CAD & CAE designs, FEA simulations, and innovative solutions in practical mechanical systems.</p>
+  </section>
+
+  <!-- Projects Grid -->
+  <section class="projects" id="projects-container">
+    <!-- Project cards will be injected here by JS -->
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; <span id="year"></span> Md Shafatullah. All Rights Reserved.</p>
+    <p>
+      Find me on:
+      <a href="https://linkedin.com/in/md-shafatullah" target="_blank">LinkedIn</a> |
+      <a href="https://github.com/MRcoder011" target="_blank">GitHub</a> |
+      <a href="https://www.instagram.com/mr_shafat01/" target="_blank">Instagram</a>
+    </p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const projects = [
+      {
+        id: "dustbin-01",
+        title: "3D Dustbin Design",
+        description: "Developed a SolidWorks model of a versatile and hygienic kitchen dustbin with a swing-out lid and ergonomic handle. Designed during my Industrial Design internship at Levon Homes Private Limited. Project files available on request via the contact section.",
+        
+        link: "https://drive.google.com/file/d/1HiJ2AdQhyt_9i1VtSEQwbhhPF8gY3lPk/view?usp=drive_link"
+      },
+      {
+        id: "pcm-fin-btms",
+        title: "PCM Fin Structures for Battery Thermal Management",
+        description: "Designed and analyzed internal and external fin structures in PCM using ANSYS FEA for battery thermal management. Optimized fin geometry reduced cell temperature by 1.62%. Project files available on request.",
+        
+        link: "https://www.linkedin.com/posts/md-shafatullah-6a22541a6_alhamdulillah-batterythermalmanagement-pcm-activity-7360260399432126465-TsCm"
+      },
+      {
+        id: "battery-pack-btms",
+        title: "Lithium-Ion Battery Pack Design & Thermal Management",
+        description: "Ongoing final year project (2025). Designed a 9-cell lithium-ion battery with water-cooling for efficient thermal management. Tools: SolidWorks, ANSYS, Raspberry Pi. Project files available on request.",
+       
+        link: "https://drive.google.com/file/d/1kbK0GDY9gvNnFmDZ94ZXDsIr9BVMIGTT/view?usp=drive_link"
+      },
+      {
+        id: "cnc-gcode-sim",
+        title: "CNC Programming & G-Code Simulation",
+        description: "Completed under Prof. Dr. Mohammad Ali in Nov 2024. Designed part geometry in SolidWorks and programmed toolpaths using G & M codes. Tools: CNC-Simulator Software, SolidWorks. Project files available on request.",
+        
+        link: "https://www.linkedin.com/posts/md-shafatullah-6a22541a6_cncprogramming-gcode-mcode-activity-7258492399520227328-QSed"
+      },
+      {
+        id: "aero-cfd-simulation",
+        title: "Aerodynamic & CFD Simulation Projects",
+        description: "Completed under Prof. Dr. Mubashshir Ansari in May 2024. Designed wing geometry using NACA airfoil, meshed in ANSYS Fluent, and analyzed lift and drag. Tools: ANSYS, SolidWorks. Project files available on request.",
+        
+        link: "https://drive.google.com/file/d/1mi_wKfSuG7SbjObrFrFQj798zvgBlDO_/view?usp=drive_link"
+      },
+      {
+        id: "gear-straight-bevel",
+        title: "Straight Bevel Gear I Design",
+        description: "SolidWorks model of a straight bevel gear demonstrating mechanical design principles and accurate 3D geometry. Project files available on request.",
+        
+        link: "https://drive.google.com/file/d/1woGGv__VjHtYByD2pGmQmnVl6HWiTaqS/view?usp=drive_link"
+      },
+      {
+        id: "gear-straight-bevel-pinion",
+        title: "Straight Bevel Pinion (ISO) Design",
+        description: "Designed in SolidWorks, this pinion is part of a bevel gear system following ISO standards. Project files available on request.",
+       
+        link: "https://drive.google.com/file/d/1KyrDkXjDg0S-z97nau6ClCMhfPz2xF8M/view?usp=drive_link"
+      },
+      {
+        id: "gear-sun",
+        title: "Sun Gear Design",
+        description: "Core component of a planetary gear system modeled in SolidWorks for precision and mechanical accuracy. Project files available on request.",
+        
+        link: "https://drive.google.com/file/d/1-DZsQzCjbKzI63j-bSTJWMH0W_AOoFIR/view?usp=drive_link"
+      },
+      {
+        id: "gear-ring",
+        title: "Ring Gear Design",
+        description: "SolidWorks model of a ring gear designed for planetary gear assemblies. Project files available on request.",
+      
+        link: "https://drive.google.com/file/d/1NozY6QAStqJoLxj-W9dYlEqajJDH5uWy/view?usp=drive_link"
+      },
+      {
+        id: "gear-spur",
+        title: "Spur Gear Design",
+        description: "Standard spur gear designed in SolidWorks to demonstrate accurate tooth profile and meshing. Project files available on request.",
+      
+        link: "https://drive.google.com/file/d/1kCUEHxaN2NKvSIJUScWYZDjDqIjLRFuG/view?usp=drive_link"
+      },
+      {
+        id: "gear-helical",
+        title: "Helical Gear (ISO) Design",
+        description: "SolidWorks model of a helical gear with ISO standard geometry, highlighting smooth transmission and mechanical accuracy. Project files available on request.",
+       
+        link: "https://drive.google.com/file/d/1031uS1hb4PJwu7n4nBwbMkKAZoQjJZVO/view?usp=drive_link"
+      },
+      {
+        id: "gear-planetary-assembly",
+        title: "Planetary Gear Assembly",
+        description: "Complete planetary gear system combining sun, ring, and planet gears in SolidWorks assembly. Project files available on request.",
+        
+        link: "https://drive.google.com/file/d/15qJUo1yDckvx5m78hsrIZnoaQu2XZTx2/view?usp=drive_link"
+      }
+    ];
+
+    const container = document.getElementById('projects-container');
+
+    projects.forEach(project => {
+      const card = document.createElement('div');
+      card.className = 'project-card';
+
+      if(project.image){
+        const img = document.createElement('img');
+        img.src = project.image;
+        img.alt = project.title;
+        card.appendChild(img);
+      }
+
+      const content = document.createElement('div');
+      content.className = 'project-content';
+
+      const h3 = document.createElement('h3');
+      h3.textContent = project.title;
+      content.appendChild(h3);
+
+      const p = document.createElement('p');
+      p.textContent = project.description;
+      content.appendChild(p);
+
+      const btn = document.createElement('a');
+      btn.href = project.link;
+      btn.className = 'btn-card';
+      btn.target = '_blank';
+      btn.textContent = 'View Project';
+      content.appendChild(btn);
+
+      card.appendChild(content);
+      container.appendChild(card);
+    });
+  </script>
+
+</body>
+</html>
