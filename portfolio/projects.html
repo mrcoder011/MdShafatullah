@@ -14,30 +14,62 @@
     /* ===== Navbar ===== */
     .navbar { position: sticky; top: 0; background-color: #0d1b2a; display:flex; justify-content: space-between; align-items: center; padding:1rem 3rem; z-index:100; box-shadow:0 2px 10px rgba(0,0,0,0.2); }
     .nav-logo { color:#ffbd39; font-weight:700; font-size:1.7rem; }
-    .nav-links { list-style:none; display:flex; gap:2rem; }
+    .nav-links { list-style:none; display:flex; gap:2rem; transition:0.3s; }
     .nav-links li a { color:#fff; font-weight:500; padding:0.5rem 1rem; border-radius:5px; transition:0.3s; }
     .nav-links li a:hover { background-color: #ffbd39; color:#0d1b2a; }
+
+    /* Hamburger Menu */
+    .hamburger { display:none; flex-direction: column; justify-content: space-between; width:25px; height:20px; cursor:pointer; }
+    .hamburger div { width: 100%; height:3px; background-color:#fff; border-radius:3px; transition: all 0.3s ease; }
+    .hamburger.toggle div:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+    .hamburger.toggle div:nth-child(2) { opacity:0; }
+    .hamburger.toggle div:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
 
     /* ===== Page Header ===== */
     .page-header { text-align:center; padding:4rem 2rem 2rem; background: linear-gradient(to right, #0d1b2a, #1b263b); color:#fff; }
     .page-header h1 { font-size:3rem; margin-bottom:1rem; }
-    .page-header p { font-size:1.2rem; max-width:700px; margin:0 auto; }
+    .page-header p { font-size:1.2rem; max-width:700px; margin:0 auto; line-height:1.6; }
 
     /* ===== Projects Grid ===== */
-    .projects { display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:2rem; padding:3rem; max-width:1200px; margin:0 auto; }
-    .project-card { position:relative; background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 6px 15px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s; }
+    .projects { display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:2rem; padding:3rem; max-width:1200px; margin:0 auto; }
+    .project-card { position:relative; background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 6px 15px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s; display:flex; flex-direction:column; }
     .project-card:hover { transform: translateY(-10px); box-shadow:0 12px 25px rgba(0,0,0,0.2); }
     .project-card img { width:100%; height:180px; object-fit:cover; }
     .project-card .project-content { padding:1.5rem; position:relative; z-index:2; }
-    .project-card .project-content h3 { margin-bottom:0.5rem; color:#0d1b2a; }
+    .project-card .project-content h3 { margin-bottom:0.5rem; color:#0d1b2a; font-size:1.2rem; }
     .project-card .project-content p { font-size:0.95rem; line-height:1.5; color:#333; }
     .btn-card { display:inline-block; margin-top:1rem; padding:0.6rem 1.2rem; background-color:#ffbd39; color:#0d1b2a; font-weight:600; border-radius:5px; transition:0.3s; text-align:center; }
     .btn-card:hover { background-color:#e6a635; color:#fff; }
 
     /* Footer */
-    footer { background-color:#0d1b2a; color:#fff; padding:2rem; text-align:center; }
+    footer { background-color:#0d1b2a; color:#fff; padding:2rem 1rem; text-align:center; }
     footer a { color:#ffbd39; margin:0 0.5rem; transition:0.3s; }
     footer a:hover { text-decoration: underline; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 70%;
+        background-color: rgba(13,27,42,0.97);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2.5rem;
+        transition: 0.3s;
+      }
+      .nav-links.active { right: 0; }
+      .hamburger { display: flex; }
+      .page-header h1 { font-size:2rem; }
+      .page-header p { font-size:1rem; }
+      .projects { padding:2rem 1rem; gap:1.5rem; }
+      .project-card img { height:160px; }
+      .project-card .project-content h3 { font-size:1.1rem; }
+      .project-card .project-content p { font-size:0.9rem; }
+    }
   </style>
 </head>
 <body>
@@ -52,6 +84,11 @@
       <li><a href="projects.html">Projects</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
+    <div class="hamburger" id="hamburger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
   </nav>
 
   <!-- Page Header -->
@@ -61,9 +98,7 @@
   </section>
 
   <!-- Projects Grid -->
-  <section class="projects" id="projects-container">
-    <!-- Project cards will be injected here by JS -->
-  </section>
+  <section class="projects" id="projects-container"></section>
 
   <!-- Footer -->
   <footer>
@@ -77,97 +112,44 @@
   </footer>
 
   <script>
+    // Dynamic Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    const projects = [
-      {
-        id: "dustbin-01",
-        title: "3D Dustbin Design",
-        description: "Developed a SolidWorks model of a versatile and hygienic kitchen dustbin with a swing-out lid and ergonomic handle. Designed during my Industrial Design internship at Levon Homes Private Limited. Project files available on request via the contact section.",
-        
-        link: "https://drive.google.com/file/d/1HiJ2AdQhyt_9i1VtSEQwbhhPF8gY3lPk/view?usp=drive_link"
-      },
-      {
-        id: "pcm-fin-btms",
-        title: "PCM Fin Structures for Battery Thermal Management",
-        description: "Designed and analyzed internal and external fin structures in PCM using ANSYS FEA for battery thermal management. Optimized fin geometry reduced cell temperature by 1.62%. Project files available on request.",
-        
-        link: "https://www.linkedin.com/posts/md-shafatullah-6a22541a6_alhamdulillah-batterythermalmanagement-pcm-activity-7360260399432126465-TsCm"
-      },
-      {
-        id: "battery-pack-btms",
-        title: "Lithium-Ion Battery Pack Design & Thermal Management",
-        description: "Ongoing final year project (2025). Designed a 9-cell lithium-ion battery with water-cooling for efficient thermal management. Tools: SolidWorks, ANSYS, Raspberry Pi. Project files available on request.",
-       
-        link: "https://drive.google.com/file/d/1kbK0GDY9gvNnFmDZ94ZXDsIr9BVMIGTT/view?usp=drive_link"
-      },
-      {
-        id: "cnc-gcode-sim",
-        title: "CNC Programming & G-Code Simulation",
-        description: "Completed under Prof. Dr. Mohammad Ali in Nov 2024. Designed part geometry in SolidWorks and programmed toolpaths using G & M codes. Tools: CNC-Simulator Software, SolidWorks. Project files available on request.",
-        
-        link: "https://www.linkedin.com/posts/md-shafatullah-6a22541a6_cncprogramming-gcode-mcode-activity-7258492399520227328-QSed"
-      },
-      {
-        id: "aero-cfd-simulation",
-        title: "Aerodynamic & CFD Simulation Projects",
-        description: "Completed under Prof. Dr. Mubashshir Ansari in May 2024. Designed wing geometry using NACA airfoil, meshed in ANSYS Fluent, and analyzed lift and drag. Tools: ANSYS, SolidWorks. Project files available on request.",
-        
-        link: "https://drive.google.com/file/d/1mi_wKfSuG7SbjObrFrFQj798zvgBlDO_/view?usp=drive_link"
-      },
-      {
-        id: "gear-straight-bevel",
-        title: "Straight Bevel Gear I Design",
-        description: "SolidWorks model of a straight bevel gear demonstrating mechanical design principles and accurate 3D geometry. Project files available on request.",
-        
-        link: "https://drive.google.com/file/d/1woGGv__VjHtYByD2pGmQmnVl6HWiTaqS/view?usp=drive_link"
-      },
-      {
-        id: "gear-straight-bevel-pinion",
-        title: "Straight Bevel Pinion (ISO) Design",
-        description: "Designed in SolidWorks, this pinion is part of a bevel gear system following ISO standards. Project files available on request.",
-       
-        link: "https://drive.google.com/file/d/1KyrDkXjDg0S-z97nau6ClCMhfPz2xF8M/view?usp=drive_link"
-      },
-      {
-        id: "gear-sun",
-        title: "Sun Gear Design",
-        description: "Core component of a planetary gear system modeled in SolidWorks for precision and mechanical accuracy. Project files available on request.",
-        
-        link: "https://drive.google.com/file/d/1-DZsQzCjbKzI63j-bSTJWMH0W_AOoFIR/view?usp=drive_link"
-      },
-      {
-        id: "gear-ring",
-        title: "Ring Gear Design",
-        description: "SolidWorks model of a ring gear designed for planetary gear assemblies. Project files available on request.",
-      
-        link: "https://drive.google.com/file/d/1NozY6QAStqJoLxj-W9dYlEqajJDH5uWy/view?usp=drive_link"
-      },
-      {
-        id: "gear-spur",
-        title: "Spur Gear Design",
-        description: "Standard spur gear designed in SolidWorks to demonstrate accurate tooth profile and meshing. Project files available on request.",
-      
-        link: "https://drive.google.com/file/d/1kCUEHxaN2NKvSIJUScWYZDjDqIjLRFuG/view?usp=drive_link"
-      },
-      {
-        id: "gear-helical",
-        title: "Helical Gear (ISO) Design",
-        description: "SolidWorks model of a helical gear with ISO standard geometry, highlighting smooth transmission and mechanical accuracy. Project files available on request.",
-       
-        link: "https://drive.google.com/file/d/1031uS1hb4PJwu7n4nBwbMkKAZoQjJZVO/view?usp=drive_link"
-      },
-      {
-        id: "gear-planetary-assembly",
-        title: "Planetary Gear Assembly",
-        description: "Complete planetary gear system combining sun, ring, and planet gears in SolidWorks assembly. Project files available on request.",
-        
-        link: "https://drive.google.com/file/d/15qJUo1yDckvx5m78hsrIZnoaQu2XZTx2/view?usp=drive_link"
+    // Hamburger menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    const navItems = document.querySelectorAll('.nav-links li a');
+
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      hamburger.classList.toggle('toggle');
+    });
+
+    navItems.forEach(item => item.addEventListener('click', () => {
+      if(navLinks.classList.contains('active')){
+        navLinks.classList.remove('active');
+        hamburger.classList.remove('toggle');
       }
+    }));
+
+    // All Projects Data
+    const projects = [
+      { id: "dustbin-01", title: "3D Dustbin Design", description: "Developed a SolidWorks model of a versatile and hygienic kitchen dustbin with a swing-out lid and ergonomic handle. Designed during my Industrial Design internship at Levon Homes Private Limited. Project files available on request via the contact section.", link: "https://drive.google.com/file/d/1HiJ2AdQhyt_9i1VtSEQwbhhPF8gY3lPk/view?usp=drive_link" },
+      { id: "pcm-fin-btms", title: "PCM Fin Structures for Battery Thermal Management", description: "Designed and analyzed internal and external fin structures in PCM using ANSYS FEA for battery thermal management. Optimized fin geometry reduced cell temperature by 1.62%. Project files available on request.", link: "https://www.linkedin.com/posts/md-shafatullah-6a22541a6_alhamdulillah-batterythermalmanagement-pcm-activity-7360260399432126465-TsCm" },
+      { id: "battery-pack-btms", title: "Lithium-Ion Battery Pack Design & Thermal Management", description: "Ongoing final year project (2025). Designed a 9-cell lithium-ion battery with water-cooling for efficient thermal management. Tools: SolidWorks, ANSYS, Raspberry Pi. Project files available on request.", link: "https://drive.google.com/file/d/1kbK0GDY9gvNnFmDZ94ZXDsIr9BVMIGTT/view?usp=drive_link" },
+      { id: "cnc-gcode-sim", title: "CNC Programming & G-Code Simulation", description: "Completed under Prof. Dr. Mohammad Ali in Nov 2024. Designed part geometry in SolidWorks and programmed toolpaths using G & M codes. Tools: CNC-Simulator Software, SolidWorks. Project files available on request.", link: "https://www.linkedin.com/posts/md-shafatullah-6a22541a6_cncprogramming-gcode-mcode-activity-7258492399520227328-QSed" },
+      { id: "aero-cfd-simulation", title: "Aerodynamic & CFD Simulation Projects", description: "Completed under Prof. Dr. Mubashshir Ansari in May 2024. Designed wing geometry using NACA airfoil, meshed in ANSYS Fluent, and analyzed lift and drag. Tools: ANSYS, SolidWorks. Project files available on request.", link: "https://drive.google.com/file/d/1mi_wKfSuG7SbjObrFrFQj798zvgBlDO_/view?usp=drive_link" },
+      { id: "gear-straight-bevel", title: "Straight Bevel Gear I Design", description: "SolidWorks model of a straight bevel gear demonstrating mechanical design principles and accurate 3D geometry. Project files available on request.", link: "https://drive.google.com/file/d/1woGGv__VjHtYByD2pGmQmnVl6HWiTaqS/view?usp=drive_link" },
+      { id: "gear-straight-bevel-pinion", title: "Straight Bevel Pinion (ISO) Design", description: "Designed in SolidWorks, this pinion is part of a bevel gear system following ISO standards. Project files available on request.", link: "https://drive.google.com/file/d/1KyrDkXjDg0S-z97nau6ClCMhfPz2xF8M/view?usp=drive_link" },
+      { id: "gear-sun", title: "Sun Gear Design", description: "Core component of a planetary gear system modeled in SolidWorks for precision and mechanical accuracy. Project files available on request.", link: "https://drive.google.com/file/d/1-DZsQzCjbKzI63j-bSTJWMH0W_AOoFIR/view?usp=drive_link" },
+      { id: "gear-ring", title: "Ring Gear Design", description: "SolidWorks model of a ring gear designed for planetary gear assemblies. Project files available on request.", link: "https://drive.google.com/file/d/1NozY6QAStqJoLxj-W9dYlEqajJDH5uWy/view?usp=drive_link" },
+      { id: "gear-spur", title: "Spur Gear Design", description: "Standard spur gear designed in SolidWorks to demonstrate accurate tooth profile and meshing. Project files available on request.", link: "https://drive.google.com/file/d/1kCUEHxaN2NKvSIJUScWYZDjDqIjLRFuG/view?usp=drive_link" },
+      { id: "gear-helical", title: "Helical Gear (ISO) Design", description: "SolidWorks model of a helical gear with ISO standard geometry, highlighting smooth transmission and mechanical accuracy. Project files available on request.", link: "https://drive.google.com/file/d/1031uS1hb4PJwu7n4nBwbMkKAZoQjJZVO/view?usp=drive_link" },
+      { id: "gear-planetary-assembly", title: "Planetary Gear Assembly", description: "Complete planetary gear system combining sun, ring, and planet gears in SolidWorks assembly. Project files available on request.", link: "https://drive.google.com/file/d/15qJUo1yDckvx5m78hsrIZnoaQu2XZTx2/view?usp=drive_link" }
     ];
 
+    // Render Projects
     const container = document.getElementById('projects-container');
-
     projects.forEach(project => {
       const card = document.createElement('div');
       card.className = 'project-card';
@@ -201,6 +183,5 @@
       container.appendChild(card);
     });
   </script>
-
 </body>
 </html>

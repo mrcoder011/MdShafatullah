@@ -8,43 +8,50 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@600&display=swap" rel="stylesheet">
   <style>
     /* ===== Global ===== */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Roboto', sans-serif; background: #0d1b2a; color: #fff; overflow-x: hidden; }
-    a { text-decoration: none; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: 'Roboto', sans-serif; background:#0d1b2a; color:#fff; overflow-x:hidden; }
+    a { text-decoration:none; }
 
     /* ===== Navbar ===== */
     .navbar {
       position: sticky;
-      top: 0;
+      top:0;
       background: rgba(13,27,42,0.95);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 3rem;
+      padding:1rem 3rem;
       z-index: 100;
       box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     }
-    .nav-logo { color: #ffbd39; font-weight: 700; font-size: 1.7rem; }
-    .nav-links { list-style: none; display: flex; gap: 2rem; }
-    .nav-links li a { color: #fff; font-weight: 500; padding: 0.5rem 1rem; border-radius: 5px; transition: 0.3s; }
-    .nav-links li a:hover { background-color: #ffbd39; color: #0d1b2a; }
+    .nav-logo { color:#ffbd39; font-weight:700; font-size:1.7rem; }
+    .nav-links { list-style:none; display:flex; gap:2rem; transition:0.3s; }
+    .nav-links li a { color:#fff; font-weight:500; padding:0.5rem 1rem; border-radius:5px; transition:0.3s; }
+    .nav-links li a:hover { background-color:#ffbd39; color:#0d1b2a; }
+
+    /* Hamburger Menu */
+    .hamburger { display:none; flex-direction: column; justify-content: space-between; width: 25px; height: 20px; cursor:pointer; }
+    .hamburger div { width: 100%; height: 3px; background-color: #fff; border-radius: 3px; transition: all 0.3s ease; }
+    .hamburger.toggle div:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+    .hamburger.toggle div:nth-child(2) { opacity:0; }
+    .hamburger.toggle div:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
 
     /* ===== Hero Section ===== */
-    .hero { position: relative; display: flex; justify-content: center; align-items: center; text-align: center; min-height: 70vh; padding: 0 2rem; overflow: hidden; }
-    #hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
-    .hero-content { position: relative; z-index: 1; max-width: 900px; }
-    .hero h2 { font-size: 2rem; margin-bottom: 1rem; color: #ffbd39; animation: fadeIn 1s ease forwards; }
-    .hero h1 { font-size: 3rem; margin-bottom: 1rem; animation: fadeIn 1.5s ease forwards; }
-    .hero h1 .highlight { color: #ffbd39; }
-    .hero-description { font-size: 1.2rem; margin-bottom: 2rem; animation: fadeIn 2s ease forwards; color: #ddd; }
+    .hero { position:relative; display:flex; justify-content:center; align-items:center; text-align:center; min-height:70vh; padding:0 2rem; overflow:hidden; }
+    #hero-bg { position:absolute; top:0; left:0; width:100%; height:100%; z-index:0; }
+    .hero-content { position:relative; z-index:1; max-width:900px; }
+    .hero h2 { font-size:2rem; margin-bottom:1rem; color:#ffbd39; animation:fadeIn 1s ease forwards; }
+    .hero h1 { font-size:3rem; margin-bottom:1rem; animation:fadeIn 1.5s ease forwards; }
+    .hero h1 .highlight { color:#ffbd39; }
+    .hero-description { font-size:1.2rem; margin-bottom:2rem; animation:fadeIn 2s ease forwards; color:#ddd; }
 
     /* ===== Buttons ===== */
-    .btn-group { animation: fadeIn 2.5s ease forwards; }
-    .btn { display: inline-block; padding: 0.7rem 1.5rem; border-radius: 5px; font-weight: 600; margin: 0.5rem; transition: 0.3s; }
-    .btn-primary { background-color: #ffbd39; color: #0d1b2a; }
-    .btn-primary:hover { background-color: #e6a70b; color: #fff; }
-    .btn-secondary { background-color: transparent; border: 2px solid #ffbd39; color: #fff; }
-    .btn-secondary:hover { background-color: #ffbd39; color: #0d1b2a; }
+    .btn-group { animation:fadeIn 2.5s ease forwards; }
+    .btn { display:inline-block; padding:0.7rem 1.5rem; border-radius:5px; font-weight:600; margin:0.5rem; transition:0.3s; text-align:center; }
+    .btn-primary { background-color:#ffbd39; color:#0d1b2a; }
+    .btn-primary:hover { background-color:#e6a70b; color:#fff; }
+    .btn-secondary { background-color:transparent; border:2px solid #ffbd39; color:#fff; }
+    .btn-secondary:hover { background-color:#ffbd39; color:#0d1b2a; }
 
     /* ===== Contact Section ===== */
     .contact-section { padding:5rem 2rem; text-align:center; }
@@ -68,23 +75,40 @@
 
     .contact-question { margin-bottom:3rem; }
     .contact-question h2 { margin-bottom:1rem; }
-    
+
     .social-links { display:flex; justify-content:center; flex-wrap:wrap; gap:1.5rem; align-items:center; color:#fff; }
-    .social-links a { color:#ffbd39; font-weight:600; transition: 0.3s; }
+    .social-links a { color:#ffbd39; font-weight:600; transition:0.3s; }
     .social-links a:hover { color:#e6a70b; }
 
     /* ===== Footer ===== */
-    footer { background-color: #0d1b2a; color: #fff; padding: 2rem; text-align: center; }
-    footer a { color: #ffbd39; margin: 0 0.5rem; transition: 0.3s; }
-    footer a:hover { text-decoration: underline; }
+    footer { background-color:#0d1b2a; color:#fff; padding:2rem; text-align:center; }
+    footer a { color:#ffbd39; margin:0 0.5rem; transition:0.3s; }
+    footer a:hover { text-decoration:underline; }
 
     /* ===== Animations ===== */
-    @keyframes fadeIn { 0% {opacity: 0; transform: translateY(20px);} 100% {opacity: 1; transform: translateY(0);} }
+    @keyframes fadeIn { 0% {opacity:0; transform:translateY(20px);} 100% {opacity:1; transform:translateY(0);} }
 
-    @media (max-width: 768px) {
-      .hero h1 { font-size: 2rem; }
-      .hero h2 { font-size: 1.5rem; }
-      .hero-description { font-size: 1rem; }
+    /* ===== Responsive ===== */
+    @media(max-width:768px){
+      .hero h1 { font-size:2rem; }
+      .hero h2 { font-size:1.5rem; }
+      .hero-description { font-size:1rem; }
+      .contact-cards { flex-direction:column; gap:1.5rem; }
+      .hamburger { display:flex; }
+      .nav-links {
+        position:fixed;
+        top:0;
+        right:-100%;
+        height:100vh;
+        width:70%;
+        background-color: rgba(13,27,42,0.97);
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        gap:2.5rem;
+        transition: right 0.3s ease;
+      }
+      .nav-links.active { right:0; }
     }
   </style>
 </head>
@@ -100,6 +124,11 @@
       <li><a href="projects.html">Projects</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
+    <div class="hamburger" id="hamburger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
   </nav>
 
   <!-- Hero Section -->
@@ -141,7 +170,7 @@
 
     <div class="contact-question">
       <h2>Have a <span style="color:#ffbd39;">Question?</span></h2>
-      <a href="" class="btn btn-primary" style="padding:1rem 2rem; font-size:1.1rem;">🡻</a>
+      <a href="#hero-bg" class="btn btn-primary" style="padding:1rem 2rem; font-size:1.1rem;">🡻</a>
     </div>
 
     <div class="social-links">
@@ -156,15 +185,32 @@
     <p>&copy; <span id="year"></span> Md Shafatullah. All Rights Reserved.</p>
   </footer>
 
-  <!-- JS for dynamic year & hero particles -->
+  <!-- JS for dynamic year & hamburger menu & hero particles -->
   <script>
+    // Dynamic Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // ===== Hero Canvas Animation (Particles) =====
+    // Hamburger Menu
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    const navItems = document.querySelectorAll('.nav-links li a');
+
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      hamburger.classList.toggle('toggle');
+    });
+
+    navItems.forEach(item => item.addEventListener('click', () => {
+      if(navLinks.classList.contains('active')){
+        navLinks.classList.remove('active');
+        hamburger.classList.remove('toggle');
+      }
+    }));
+
+    // Hero Particles
     const canvas = document.getElementById('hero-bg');
     const ctx = canvas.getContext('2d');
-    let particles = [];
-    let w, h;
+    let particles = [], w, h;
 
     function resizeCanvas() {
       w = canvas.width = window.innerWidth;
@@ -183,24 +229,23 @@
       }
       draw() {
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2);
         ctx.fillStyle = 'rgba(255,189,57,0.7)';
         ctx.fill();
       }
       update() {
         this.x += this.dx;
         this.y += this.dy;
-        if(this.x < 0 || this.x > w) this.dx *= -1;
-        if(this.y < 0 || this.y > h) this.dy *= -1;
+        if(this.x < 0 || this.x > w) this.dx*=-1;
+        if(this.y < 0 || this.y > h) this.dy*=-1;
         this.draw();
       }
     }
 
-    for(let i=0; i<100; i++) particles.push(new Particle());
-
+    for(let i=0;i<100;i++) particles.push(new Particle());
     function animate() {
       ctx.clearRect(0,0,w,h);
-      particles.forEach(p => p.update());
+      particles.forEach(p=>p.update());
       requestAnimationFrame(animate);
     }
     animate();

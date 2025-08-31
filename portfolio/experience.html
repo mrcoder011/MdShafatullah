@@ -38,6 +38,7 @@
       list-style: none;
       display: flex;
       gap: 2rem;
+      transition: 0.3s;
     }
     .nav-links li a {
       color: #fff;
@@ -51,6 +52,13 @@
       color: #0d1b2a;
     }
 
+    /* Hamburger Menu */
+    .hamburger { display: none; flex-direction: column; justify-content: space-between; width: 25px; height: 20px; cursor: pointer; }
+    .hamburger div { width: 100%; height: 3px; background-color: #fff; border-radius: 3px; transition: all 0.3s ease; }
+    .hamburger.toggle div:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+    .hamburger.toggle div:nth-child(2) { opacity: 0; }
+    .hamburger.toggle div:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+
     /* ===== Page Header ===== */
     .page-header {
       text-align: center;
@@ -61,16 +69,8 @@
       border-bottom-right-radius: 20px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
-    .page-header h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-    .page-header p {
-      font-size: 1.2rem;
-      max-width: 700px;
-      margin: 0 auto;
-      line-height: 1.6;
-    }
+    .page-header h1 { font-size: 3rem; margin-bottom: 1rem; }
+    .page-header p { font-size: 1.2rem; max-width: 700px; margin: 0 auto; line-height: 1.6; }
 
     /* ===== Experience Grid ===== */
     .grid {
@@ -89,11 +89,10 @@
       box-shadow: 0 6px 20px rgba(0,0,0,0.15);
       transition: transform 0.3s, box-shadow 0.3s;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
-    .about-card:hover {
-      transform: translateY(-10px) rotate(-1deg);
-      box-shadow: 0 12px 25px rgba(0,0,0,0.25);
-    }
+    .about-card:hover { transform: translateY(-10px) rotate(-1deg); box-shadow: 0 12px 25px rgba(0,0,0,0.25); }
     .about-card::before {
       content: "⚙️";
       position: absolute;
@@ -102,17 +101,8 @@
       top: 10px;
       right: 15px;
     }
-    .about-card h3 {
-      color: #0d1b2a;
-      margin-bottom: 1rem;
-      font-size: 1.3rem;
-    }
-    .about-card p {
-      font-size: 1rem;
-      line-height: 1.6;
-      color: #333;
-      margin-bottom: 1.2rem;
-    }
+    .about-card h3 { color: #0d1b2a; margin-bottom: 1rem; font-size: 1.3rem; }
+    .about-card p { font-size: 1rem; line-height: 1.6; color: #333; margin-bottom: 1.2rem; }
     .certificate-btn {
       display: inline-block;
       padding: 0.6rem 1.2rem;
@@ -121,35 +111,45 @@
       font-weight: 600;
       border-radius: 8px;
       transition: 0.3s;
+      text-align: center;
     }
-    .certificate-btn:hover {
-      background-color: #e6a70b;
-      color: #fff;
-      transform: scale(1.05);
-    }
+    .certificate-btn:hover { background-color: #e6a70b; color: #fff; transform: scale(1.05); }
 
     /* ===== Footer ===== */
     footer {
       background-color: #0d1b2a;
       color: #fff;
-      padding: 2rem;
+      padding: 2rem 1rem;
       text-align: center;
       margin-top: 3rem;
       border-top-left-radius: 15px;
       border-top-right-radius: 15px;
     }
-    footer a {
-      color: #ffbd39;
-      margin: 0 0.5rem;
-      transition: 0.3s;
-    }
+    footer a { color: #ffbd39; margin: 0 0.5rem; transition:0.3s; }
     footer a:hover { text-decoration: underline; }
 
+    /* ===== Responsive ===== */
     @media(max-width: 768px){
-      .page-header h1 { font-size: 2.5rem; }
-      .page-header p { font-size: 1.1rem; }
+      .page-header h1 { font-size: 2.2rem; }
+      .page-header p { font-size: 1rem; }
+      .grid { padding: 2rem 1rem; gap: 1.5rem; }
+      .about-card h3 { font-size: 1.1rem; }
+      .about-card p { font-size: 0.95rem; }
+      .hamburger { display: flex; }
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 70%;
+        background-color: rgba(13,27,42,0.97);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2.5rem;
+      }
+      .nav-links.active { right: 0; }
     }
-
   </style>
 </head>
 <body>
@@ -164,6 +164,11 @@
       <li><a href="projects.html">Projects</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
+    <div class="hamburger" id="hamburger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
   </nav>
 
   <!-- Page Header -->
@@ -186,35 +191,14 @@
       <a href="https://drive.google.com/file/d/19FJMEI8SpXF0n4YSBJeFT0xAWFyxLwzn/view" target="_blank" class="certificate-btn">Certificate</a>
     </article>
 
-   <article class="about-card">
-  <h3>
-    SAE-ZHCET Club — Solid Modeling & Chassis Design 
-    <span style="font-weight: normal;">(Jun 2023 - Jul 2023)</span>
-  </h3>
-  <p>
-    Led design & modeling in SolidWorks, focusing on structural integrity and manufacturability. 
-    <strong>Executive Member</strong> — guided iterative design and prototyping. 
-    <br>
-    <strong>Also served as Executive Member of the Formula Racing Club.</strong>
-  </p>
-  <div class="button-group" style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-    <a href="https://rocketreach.co/shafatullah-email_521109016" 
-       target="_blank" 
-       class="certificate-btn" 
-       style="padding: 0.6rem 1.2rem; border-radius: 6px; background-color: #ffbd39; color: #0d1b2a; text-decoration: none; font-weight: 500;">
-       Profile
-    </a>
-    <a href="https://drive.google.com/file/d/18-UVWfPAcSJtvyXpW-dExnbz-kzenc0O/view?usp=drive_link" 
-       target="_blank" 
-       class="certificate-btn" 
-       style="padding: 0.6rem 1.2rem; border-radius: 6px; background-color: #0d1b2a; color: #ffbd39; border: 2px solid #ffbd39; text-decoration: none; font-weight: 500;">
-       See Projects
-    </a>
-  </div>
-</article>
-
-
-
+    <article class="about-card">
+      <h3>SAE-ZHCET Club — Solid Modeling & Chassis Design (Jun 2023 - Jul 2023)</h3>
+      <p>Led design & modeling in SolidWorks, focusing on structural integrity and manufacturability. <strong>Executive Member</strong> — guided iterative design and prototyping. Also served as Executive Member of the Formula Racing Club.</p>
+      <div class="button-group" style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="https://rocketreach.co/shafatullah-email_521109016" target="_blank" class="certificate-btn" style="background-color: #ffbd39; color: #0d1b2a;">Profile</a>
+        <a href="https://drive.google.com/file/d/18-UVWfPAcSJtvyXpW-dExnbz-kzenc0O/view?usp=drive_link" target="_blank" class="certificate-btn" style="background-color: #0d1b2a; color: #ffbd39; border: 2px solid #ffbd39;">See Projects</a>
+      </div>
+    </article>
 
     <article class="about-card">
       <h3>I-STEM Volunteer Ambassador — IISc Bengaluru</h3>
@@ -229,4 +213,31 @@
     <p>
       Find me on:
       <a href="https://linkedin.com/in/md-shafatullah" target="_blank">LinkedIn</a> |
-      <a href="https://github.com
+      <a href="https://github.com/MRcoder011" target="_blank">GitHub</a> |
+      <a href="https://www.instagram.com/mr_shafat01/" target="_blank">Instagram</a>
+    </p>
+  </footer>
+
+  <script>
+    // Dynamic Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Hamburger Menu
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    const navItems = document.querySelectorAll('.nav-links li a');
+
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      hamburger.classList.toggle('toggle');
+    });
+
+    navItems.forEach(item => item.addEventListener('click', () => {
+      if(navLinks.classList.contains('active')){
+        navLinks.classList.remove('active');
+        hamburger.classList.remove('toggle');
+      }
+    }));
+  </script>
+</body>
+</html>

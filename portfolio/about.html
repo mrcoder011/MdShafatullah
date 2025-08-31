@@ -7,177 +7,129 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@600&display=swap" rel="stylesheet">
   <style>
     /* ===== Global ===== */
-    body {
-      margin: 0;
-      font-family: 'Roboto', sans-serif;
-      background-color: #f2f4f8;
-      color: #0d1b2a;
-      line-height: 1.6;
-    }
-    a { text-decoration: none; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: 'Roboto', sans-serif; background-color:#f2f4f8; color:#0d1b2a; line-height:1.6; }
+    a { text-decoration:none; }
+    ul { list-style:none; padding-left:0; }
 
     /* ===== Navbar ===== */
     .navbar {
       position: sticky;
-      top: 0;
+      top:0;
       background-color: #0d1b2a;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 3rem;
-      z-index: 100;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:1rem 2rem;
+      z-index:100;
       box-shadow: 0 3px 15px rgba(0,0,0,0.2);
     }
-    .nav-logo {
-      color: #ffbd39;
-      font-weight: 700;
-      font-size: 1.8rem;
-    }
-    .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 2rem;
-    }
-    .nav-links li a {
-      color: #fff;
-      font-weight: 500;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      transition: 0.3s;
-    }
-    .nav-links li a:hover {
-      background-color: #ffbd39;
-      color: #0d1b2a;
-    }
+    .nav-logo { color:#ffbd39; font-weight:700; font-size:1.7rem; }
+    .nav-links { display:flex; gap:2rem; }
+    .nav-links li a { color:#fff; font-weight:500; padding:0.5rem 1rem; border-radius:5px; transition:0.3s; }
+    .nav-links li a:hover { background-color:#ffbd39; color:#0d1b2a; }
+
+    /* Hamburger Menu */
+    .hamburger { display:none; flex-direction:column; justify-content:space-between; width:25px; height:20px; cursor:pointer; }
+    .hamburger div { width:100%; height:3px; background:#fff; border-radius:3px; transition: all 0.3s ease; }
+    .hamburger.toggle div:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+    .hamburger.toggle div:nth-child(2) { opacity:0; }
+    .hamburger.toggle div:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
 
     /* ===== Page Header ===== */
     .page-header {
-      text-align: center;
-      padding: 5rem 2rem 3rem 2rem;
+      text-align:center;
+      padding:5rem 2rem 3rem;
       background: linear-gradient(to right, #0d1b2a, #1b263b);
-      color: #fff;
-      border-bottom-left-radius: 20px;
-      border-bottom-right-radius: 20px;
+      color:#fff;
+      border-bottom-left-radius:20px;
+      border-bottom-right-radius:20px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
-    .page-header h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-    .page-header p {
-      font-size: 1.2rem;
-      max-width: 700px;
-      margin: 0 auto;
-      line-height: 1.6;
-    }
+    .page-header h1 { font-size:3rem; margin-bottom:1rem; }
+    .page-header p { font-size:1.2rem; max-width:700px; margin:0 auto; line-height:1.6; }
 
     /* ===== About Section ===== */
     .two-col {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      max-width: 1200px;
-      margin: 3rem auto;
-      padding: 0 2rem;
+      display:flex;
+      flex-wrap:wrap;
+      gap:2rem;
+      max-width:1200px;
+      margin:3rem auto;
+      padding:0 2rem;
     }
     .two-col > div {
-      flex: 2;
-      min-width: 280px;
+      flex:2;
+      min-width:280px;
     }
     .two-col aside {
-      flex: 1;
-      min-width: 250px;
-      background: #fff;
-      border-radius: 15px;
-      padding: 2rem;
+      flex:1;
+      min-width:250px;
+      background:#fff;
+      border-radius:15px;
+      padding:2rem;
       box-shadow: 0 6px 20px rgba(0,0,0,0.1);
       transition: transform 0.3s, box-shadow 0.3s;
     }
-    .two-col aside:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
-    }
-    .two-col h3 {
-      margin-top: 1rem;
-      color: #0d1b2a;
-    }
-    .two-col p, .two-col li {
-      color: #333;
-    }
-    ul {
-      padding-left: 1.2rem;
-      margin-top: 0.5rem;
-    }
+    .two-col aside:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.15); }
+    .two-col h3 { margin-top:1rem; color:#0d1b2a; }
+    .two-col p, .two-col li { color:#333; margin-bottom:0.5rem; }
 
     /* ===== Skill Badges ===== */
-    .skills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.7rem;
-      margin-top: 0.5rem;
-    }
-    .skills span {
-      background-color: #ffbd39;
-      color: #0d1b2a;
-      padding: 0.4rem 0.8rem;
-      border-radius: 6px;
-      font-size: 0.9rem;
-      font-weight: 500;
-    }
+    .skills { display:flex; flex-wrap:wrap; gap:0.7rem; margin-top:0.5rem; }
+    .skills span { background-color:#ffbd39; color:#0d1b2a; padding:0.4rem 0.8rem; border-radius:6px; font-size:0.9rem; font-weight:500; }
 
     /* ===== Buttons ===== */
-    .btn-group {
-      margin-top: 1.5rem;
-    }
+    .btn-group { margin-top:1.5rem; display:flex; flex-wrap:wrap; gap:1rem; }
     .btn {
-      display: inline-block;
-      padding: 0.6rem 1.2rem;
-      border-radius: 8px;
-      font-weight: 600;
-      margin-right: 1rem;
-      transition: all 0.3s ease;
-      cursor: pointer;
+      display:inline-block;
+      padding:0.6rem 1.2rem;
+      border-radius:8px;
+      font-weight:600;
+      transition:all 0.3s ease;
+      cursor:pointer;
+      text-align:center;
     }
     .btn-primary {
-      background: linear-gradient(135deg, #1e90ff, #00bfff); /* Blue gradient */
-      color: #fff;
-      box-shadow: 0 4px 15px rgba(30,144,255,0.4);
+      background: linear-gradient(135deg,#1e90ff,#00bfff);
+      color:#fff;
+      box-shadow:0 4px 15px rgba(30,144,255,0.4);
     }
     .btn-primary:hover {
-      background: linear-gradient(135deg, #0066cc, #0099ff);
-      color: #fff;
-      transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(30,144,255,0.5);
+      background: linear-gradient(135deg,#0066cc,#0099ff);
+      transform:scale(1.05);
+      box-shadow:0 6px 20px rgba(30,144,255,0.5);
     }
     .btn-secondary {
-      background-color: #0d1b2a;
-      color: #fff;
-      border: 2px solid #ffbd39;
+      background-color:#0d1b2a;
+      color:#fff;
+      border:2px solid #ffbd39;
     }
     .btn-secondary:hover {
-      background-color: #ffbd39;
-      color: #0d1b2a;
-      transform: scale(1.05);
+      background-color:#ffbd39;
+      color:#0d1b2a;
+      transform:scale(1.05);
     }
 
     /* ===== Footer ===== */
     footer {
-      background-color: #0d1b2a;
-      color: #fff;
-      padding: 2rem;
-      text-align: center;
-      border-top-left-radius: 15px;
-      border-top-right-radius: 15px;
+      background-color:#0d1b2a;
+      color:#fff;
+      padding:2rem;
+      text-align:center;
+      border-top-left-radius:15px;
+      border-top-right-radius:15px;
     }
-    footer a {
-      color: #ffbd39;
-      margin: 0 0.5rem;
-      transition: 0.3s;
-    }
-    footer a:hover { text-decoration: underline; }
+    footer a { color:#ffbd39; margin:0 0.5rem; transition:0.3s; }
+    footer a:hover { text-decoration:underline; }
 
-    @media (max-width: 768px) {
-      .two-col { flex-direction: column; }
+    /* ===== Responsive ===== */
+    @media(max-width:768px){
+      .two-col { flex-direction:column; }
+      .navbar { padding:1rem; }
+      .nav-links { position:fixed; top:0; right:-100%; height:100vh; width:70%; background:rgba(13,27,42,0.97); flex-direction:column; align-items:center; justify-content:center; gap:2.5rem; transition:0.3s; }
+      .nav-links.active { right:0; }
+      .hamburger { display:flex; }
     }
   </style>
 </head>
@@ -193,6 +145,11 @@
       <li><a href="projects.html">Projects</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
+    <div class="hamburger" id="hamburger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
   </nav>
 
   <!-- Page Header -->
@@ -207,7 +164,7 @@
       <p>I'm <strong>Md Shafatullah</strong>, a Mechanical Engineering student (B.Tech - Automobile) at Aligarh Muslim University. I specialize in CAD, simulation, mechanical design, and battery thermal management with hands-on experience in prototyping, assembly, and process improvement.</p>
 
       <h3>Skills</h3>
-      
+
       <p><strong>Programming & Languages:</strong></p>
       <div class="skills">
         <span>Python</span>
@@ -267,7 +224,23 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
 
+    // Hamburger Menu
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    const navItems = document.querySelectorAll('.nav-links li a');
+
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      hamburger.classList.toggle('toggle');
+    });
+
+    navItems.forEach(item => item.addEventListener('click', () => {
+      if(navLinks.classList.contains('active')){
+        navLinks.classList.remove('active');
+        hamburger.classList.remove('toggle');
+      }
+    }));
+  </script>
 </body>
 </html>
